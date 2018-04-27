@@ -1,0 +1,14 @@
+TARGETNAME=app
+TARGETTYPE=PROGRAM
+
+SOURCES=test.c
+
+USE_MSVCRT=1
+
+INCLUDES=..\inc
+
+UMTYPE=console
+UMLIBS=$(SDK_LIB_PATH)\gdi32.lib    \
+       $(SDK_LIB_PATH)\user32.lib   \
+       $(SDK_LIB_PATH)\kernel32.lib
+
