@@ -4,7 +4,7 @@
 #include "stdlib.h"
 #include "myioctl.h"
 
-int main ( void )
+int __cdecl main ( void )
 {
     HANDLE hDriver;
     DWORD cbReturned = 0x0;
@@ -12,18 +12,15 @@ int main ( void )
 
     // Try to open the device
 
-    if ((hDriver = CreateFile("\\\.\\MASTER",
+    if ((hDriver = CreateFile("\\.\\MASTER",
                         GENERIC_READ | GENERIC_WRITE,
                         0,
                         NULL,
                         OPEN_EXISTING,
                         FILE_ATTRIBUTE_NORMAL,
-                        NULL )) != INVALID_HANDLE_VALUE )
-
+                        NULL )) != INVALID_HANDLE_VALUE ) {
             printf ("\nRetrieved valid handle for MASTER driver\n");
-
-        else
-    {
+    } else {
         printf ("Can't get a handle to MASTER driver\n");
         return 0;
     }
@@ -37,8 +34,7 @@ int main ( void )
                         &iobuf,
                         (DWORD)(2*(sizeof (WORD))),
                         &cbReturned,
-                        (LPVOID)NULL) )
-    {
+                        (LPVOID)NULL) ) {
 
         if (iobuf == 0xAA55) {
             printf("DeviceIoControl worked and returned the correct value.\n");
